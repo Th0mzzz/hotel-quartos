@@ -1,0 +1,11 @@
+﻿<h2>Detalhes do cliente</h2>
+
+<div>
+    <hr />
+    <%- include("../../../partial/dados-cliente.ejs") %>
+
+</div>
+<p>
+    <a class="btn btn-success btn-lg" href="/adm-cliente-edit?id=<%= cliente.id_usuario %>" role="button">Editar</a>
+    <a class="btn btn-primary " href="/adm-cliente" role="button">voltar</a>
+</p>

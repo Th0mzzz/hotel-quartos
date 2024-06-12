@@ -1,0 +1,72 @@
+<div class="form-horizontal">
+    <hr />
+    <div class="form-group">
+        <label for="nome" class="control-label col-md-2">Nome</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" name="nome" required value="<%= cliente? cliente.nome_usuario : ''%>">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="fone" class="control-label col-md-2">Telefone</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" name="fone" required value="<%= cliente? cliente.fone_usuario : ''%>">
+        </div>
+    </div>
+
+    <div class="form-group" style="display:flex; align-items:center">
+        <label for="" class="control-label col-md-2">Imagem Perfil</label>
+        <div class="col-md-5">
+            <input class="form-control" type="file" name="ImagemPerfil">
+        </div>
+        <img id="img-preview" src="imagem/img_login.png" style="max-width:80px; max-height:80px;" />
+    </div>
+
+    <div class="form-group">
+        <label for="nomeUsuario" class="control-label col-md-2">Nome de Usuário</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" name="nomeUsuario" required value="<%= cliente? cliente.user_usuario : '' %>"> 
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="email" class="control-label col-md-2">E-mail</label>
+        <div class="col-md-10">
+            <input class="form-control" type="text" name="email" required value="<%= cliente? cliente.email_usuario : '' %>">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="senha" class="control-label col-md-2">Senha</label>
+        <div class="col-md-10">
+            <input class="form-control" type="password" name="senha" required >
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="tipo" class="control-label col-md-2">Tipo Usuario</label>
+        <div class="col-md-10">
+            <select name="tipo" class="form-control" required>
+                <option value="1" <%= cliente? cliente.tipo_usuario == 1 ? "selected" :'' : "" %> >Comum</option>
+                <option value="2" <%= cliente? cliente.tipo_usuario == 2 ? "selected" :''  : "" %> >Gerente</option>
+                <option value="3" <%= cliente? cliente.tipo_usuario == 3 ? "selected" :'' :"" %>  >Administrador</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="status" class="control-label col-md-2">Status</label>
+        <div class="col-md-10">
+            <select class="form-control" name="status" required>
+                <option value="1" <%= cliente? cliente.tipo_usuario_id_tipo_usuario == 1 ? "selected" :'' : "" %> >Ativo</option>
+                <option value="0" <%= cliente? cliente.tipo_usuario_id_tipo_usuario == 1 ? "selected" :'' : "" %> >Inativo</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Salvar" class="btn btn-success" />
+        </div>
+    </div>
+</div>

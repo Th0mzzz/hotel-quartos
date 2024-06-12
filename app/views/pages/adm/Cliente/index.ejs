@@ -1,0 +1,38 @@
+﻿<h2>Lista de clientes</h2>
+
+<p>
+    <a href="/adm-cliente-novo" class="btn btn-success"> Novo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Nome de Usuário</th>
+            <th>E-mail</th>
+            <th>Imagem de Perfil</th>
+            <th>Status</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaDeClientes.forEach(function(cliente) { %>
+            <tr>
+                <td><%= cliente.nome_usuario%></td>
+                <td><%= cliente.user_usuario %></td>
+                <td><%= cliente.email_usuario %></td>
+                <td>
+                    <img alt="imagem de perfil" id="img-preview" src="../imagem/img_login.png"
+                        style="max-width:35px; max-height:35px;" />
+                </td>
+                <td><%= cliente.status_usuario == 1? 'Ativo' : 'inativo'%></td>
+                <td>
+                   
+                    <a href="adm-cliente-edit?id=<%= cliente.id_usuario %>" class="btn btn-warning">Editar</a>
+                    <a href="adm-cliente-list?id=<%= cliente.id_usuario %>" class="btn btn-info"> Detalhes</a>
+                    <a href="adm-cliente-del?id=<%= cliente.id_usuario %>" class="btn btn-danger">Excluir</a>
+                </td>
+            </tr>
+            <% }) %>
+
+    </tbody>
+</table>

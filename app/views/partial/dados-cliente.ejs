@@ -1,0 +1,72 @@
+<dl class="dl-horizontal">
+    <dt>
+        Nome
+    </dt>
+
+    <dd>
+        <%= cliente.nome_usuario %>
+    </dd>
+
+    <dt>
+        CEP
+    </dt>
+
+    <dd>
+        <%= cliente.cep_usuario %>
+    </dd>
+
+    <dt>
+        Imagem de Perfil
+    </dt>
+
+    <dd>
+        <img id="img-preview" src="imagem/img_login.png" style="max-width:200px; max-height:200px;" />
+    </dd>
+
+    <dt>
+        Nome de Usuário
+    </dt>
+
+    <dd>
+        <%= cliente.user_usuario %>
+    </dd>
+
+    <dt>
+        E-mail
+    </dt>
+
+    <dd>
+        <%= cliente.email_usuario %>
+    </dd>
+
+    <dt>
+        Tipo Usuário
+    </dt>
+
+    <dd>
+        <%
+        let tipoNumber = cliente.tipo_usuario_id_tipo_usuario 
+        let tipoUsuario = '';
+
+        switch(true){
+            case tipoNumber == '1' : tipoUsuario = 'Comum'
+            break;
+            case tipoNumber == '2' : tipoUsuario = 'Gerente'
+            break;
+            case tipoNumber == '3' : tipoUsuario = 'Administrador'
+            break;
+            default:
+            tipoUsuario = ""
+            break;
+        }
+        %>
+        <%= tipoUsuario%>
+    </dd>
+
+    <dt>
+        Status
+    </dt>
+
+    <dd>
+        <%= cliente.status_usuario == 1? 'Ativo' : 'inativo'%>
+    </dd>
