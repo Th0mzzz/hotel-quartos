@@ -1,19 +1,32 @@
 ﻿<!-- include header -->
 <%- include("../partial/header-home") %>
-
-<main>
-    <div class="login-page">
-        <div class="form-cadastro">
-            <a href="/"><span id="fechar">&times;</span></a>
-            <form action="login" method="post" class = "login-form">
-                <h2>Login</h2>
-                <input type="text" name="nome" id="nome" placeholder = "Nome de usuáio ou e-mail" >
-                <input type="password" name="senha" id="senha" placeholder = "Senha de usuário" >
-                <button type="submit">Entrar</button>
-                <p class="message">Não é cadastrado? <a href="/cadastro">Crie uma conta</a></p>
-            </form>
+    <style>
+        .alert {
+            background: #ff7070;
+            color: #880909;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            border: 1px solid #880909;
+            margin-bottom: 1rem;
+        }
+    </style>
+    <main>
+        <div class="login-page">
+            <div class="form-cadastro">
+                <a href="/"><span id="fechar">&times;</span></a>
+                <form action="/logar" method="post" class="login-form">
+                    <h2>Login</h2>
+                    <% if(alert) {%>
+                        <h4 class="alert">Usuário ou Senha incorretos</h4>
+                        <% }%>
+                            <input type="text" name="emailOrUser" id="emailOrUser"
+                                placeholder="Nome de usuário ou e-mail" required>
+                            <input type="password" name="senha" id="senha" placeholder="Senha de usuário" required>
+                            <button type="submit">Entrar</button>
+                            <p class="message">Não é cadastrado? <a href="/cadastro">Crie uma conta</a></p>
+                </form>
+            </div>
         </div>
-    </div>
 
 
-</main>
+    </main>
