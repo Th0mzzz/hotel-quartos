@@ -1,7 +1,7 @@
 const tipoQuartosModel = require("../models/tipoQuartos");
 const tipoQuartosController = {
   regrasValidacao: [],
-  listarTiposQuartosPaginados: async (req, res) => {
+  paginarQuartos: async (req, res) => {
     try {
       let page = req.query.page == undefined ? 1 : req.query.page;
       let results = null
@@ -22,7 +22,7 @@ const tipoQuartosController = {
 
     } catch (erros) {
       console.log(erros)
-      res.json({ erro: "problemas" })
+      res.redirect("pages/error")
     }
   }
 

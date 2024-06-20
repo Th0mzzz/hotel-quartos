@@ -28,7 +28,7 @@ const middleWares = {
     },
     gravarAutenticacao: async (req, res, next) => {
 
-        var userBd = await usuariosModel.buscarPorEmailouUsuario(req.body.emailOrUser)
+        var userBd = await usuariosModel.findByEmailOrUser(req.body.emailOrUser)
 
         if (Object.keys(userBd).length == 1) {
             if (req.body.senha == userBd[0].senha_usuario) {

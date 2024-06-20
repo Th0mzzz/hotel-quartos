@@ -17,7 +17,7 @@ const usuariosModel = {
             return error;
         }
     },
-    buscarPorId: async (idUsuario) => {
+    findById: async (idUsuario) => {
         try {
             const [resultado] = await pool.query(`select * from usuario where id_usuario = ? and status_usuario = 1`, [idUsuario])
             return resultado[0];
@@ -26,7 +26,15 @@ const usuariosModel = {
             throw error
         }
     },
-    buscarPorEmailouUsuario: async (valor) => {
+    findByEmailOrUser: async (valor) => {
+        try {
+            const [resultado] = await pool.query("select * from usuario where email_usuario = ? OR user_usuario = ?", [valor, valor])
+            return resultado
+        } catch (error) {
+            return error;
+        }
+    },
+    findByPhone: async (valor) => {
         try {
             const [resultado] = await pool.query("select * from usuario where email_usuario = ? OR user_usuario = ?", [valor, valor])
             return resultado

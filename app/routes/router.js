@@ -9,7 +9,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/quartos", function (req, res) {
-    tipoQuartosController.listarTiposQuartosPaginados(req, res);
+    tipoQuartosController.paginarQuartos(req, res);
 });
 
 router.get("/quartos-estatico", function (req, res) {
@@ -22,15 +22,15 @@ router.get("/login", function (req, res) {
 router.get("/cadastro", function (req, res) {
     res.render("pages/template-home", { pagina: "cadastro", logado: null });
 });
-router.get("/perfil", middleWares.verifyAutenticado, middleWares.verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [1,2,3]), function (req, res) {
+router.get("/perfil", middleWares.verifyAutenticado, middleWares.verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [1, 2, 3]), function (req, res) {
     res.render("pages/template-home", { pagina: "perfil", logado: "logado" });
 });
 
-router.post("/cadastrar", function (req, res) {
+router.post("/cadastrar", usuariosController.validarCadastro, function (req, res) {
     usuariosController.cadastrarUsuario(req, res)
 })
-router.post("/logar", middleWares.gravarAutenticacao, function (req, res) {
-    usuariosController.logar(req, res)
+router.post("/logar", usuariosController.validarLogin, middleWares.gravarAutenticacao, function (req, res) {
+    usuariosController.entrar(req, res)
 })
 
 // ADMIN
@@ -71,7 +71,7 @@ router.post("/editarUsuario", function (req, res) {
     usuariosController.editarUsuario(req, res)
 });
 
-router.get("/logOut", middleWares.clearSession, function(req,res){
+router.get("/logOut", middleWares.clearSession, function (req, res) {
     res.redirect("/")
 })
 
