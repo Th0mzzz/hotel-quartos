@@ -1,4 +1,4 @@
-const usuariosModel = require("./usuariosModel")
+const usuariosModel = require("./models/usuariosModel")
 
 const middleWares = {
     verifyAutenticado: (req, res, next) => {

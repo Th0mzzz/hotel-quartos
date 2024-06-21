@@ -8,7 +8,7 @@ app.use((session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
-})))
+})));
 app.use(express.static("app/public"));
 
 app.set("view engine", "ejs");

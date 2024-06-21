@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 const usuariosController = require("../controllers/usuariosController")
 const tipoQuartosController = require("../controllers/tipoQuartosController");
-const middleWares = require("../models/middlewares");
+const middleWares = require("../middlewares");
 
 router.get("/", function (req, res) {
     res.render("pages/template-home", { pagina: "home", logado: null });
