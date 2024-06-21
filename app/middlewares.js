@@ -1,4 +1,4 @@
-const usuariosModel = require("./usuariosModel")
+const usuariosModel = require("./models/usuariosModel")
 
 const verifyAutenticado = (req, res, next) => {
     if (req.session.autenticado) {
