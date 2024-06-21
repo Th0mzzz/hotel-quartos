@@ -70,21 +70,33 @@ const usuariosController = {
             .bail()
     ],
     entrar: async (req, res) => {
-        try {
-            const { emailOrUser, senha } = req.body;
-            const userBd = await usuariosModel.findByEmailOrUser(emailOrUser)
-            console.log(userBd[0])
-            if (userBd[0] && userBd[0].senha_usuario == senha) {
-                res.redirect("/perfil")
-            } else {
-                res.render("pages/template-home", { pagina: "login", logado: null, alert: true });
-
+        let errors = validationResult(req)
+        if (!errors.isEmpty()) {
+            console.log(errors)
+            const jsonResult = {
+                pagina: "login",
+                valores: req.body,
+                erros: errors,
+                alert: null,
+                logado: null
             }
-        } catch (error) {
-            console.log(error)
-            res.json({ erro: error })
-        }
+            res.render("pages/template-home", jsonResult);
+        } else {
+            try {
+                const { emailOrUser, senha } = req.body;
+                const userBd = await usuariosModel.findByEmailOrUser(emailOrUser)
+                console.log(userBd[0])
+                if (userBd[0] && userBd[0].senha_usuario == senha) {
+                    res.redirect("/perfil")
+                } else {
+                    res.render("pages/template-home", { pagina: "login", logado: null, alert: true , erros:null});
 
+                }
+            } catch (error) {
+                console.log(error)
+                res.json({ erro: error })
+            }
+        }
     },
     cadastrarUsuario: async (req, res) => {
         let errors = validationResult(req)

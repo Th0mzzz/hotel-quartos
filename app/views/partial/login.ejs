@@ -1,12 +1,13 @@
 ﻿<!-- include header -->
 <%- include("../partial/header-home") %>
 
-<% let avisoErro = {
+<% 
+let avisoErro = {
     "emailOrUser":"",
     "senha":"",
 }
 
-let = msgErro =""
+let msgErro =""
 
     if(erros){
         erros.errors.forEach(erro =>{
@@ -33,7 +34,7 @@ let = msgErro =""
         }
 
         .erro{
-            border: 1px solid red;
+            border: 1px solid red !important;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/simple-notify@1.0.4/dist/simple-notify.min.js"></script>
