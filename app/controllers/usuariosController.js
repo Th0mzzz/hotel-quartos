@@ -87,7 +87,12 @@ const usuariosController = {
                 const userBd = await usuariosModel.findByEmailOrUser(emailOrUser)
                 console.log(userBd[0])
                 if (userBd[0] && userBd[0].senha_usuario == senha) {
-                    res.redirect("/perfil")
+                    if(userBd[0].tipo_usuario > 2){
+                        res.redirect("/adm")
+                    }else{
+
+                        res.redirect("/perfil")
+                    }
                 } else {
                     res.render("pages/template-home", { pagina: "login", logado: null, alert: true , erros:null});
 

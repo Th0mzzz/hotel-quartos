@@ -2,7 +2,8 @@ var express = require("express");
 var router = express.Router();
 const usuariosController = require("../controllers/usuariosController")
 const tipoQuartosController = require("../controllers/tipoQuartosController");
-const { clearSession, gravarAutenticacao, verifyAutenticado, verifyAutorizado } = require("../models/middlewares");
+const { clearSession, gravarAutenticacao, verifyAutenticado, verifyAutorizado } = require("../middlewares");
+const clienteController = require("../controllers/clienteControl");
 
 router.get("/", function (req, res) {
     res.render("pages/template-home", { pagina: "home", logado: null });
@@ -30,40 +31,40 @@ router.post("/logar", usuariosController.validarLogin, gravarAutenticacao, funct
 })
 
 // ADMIN
-router.get("/adm", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
+router.get("/adm", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
     res.render("pages/adm/template-adm", { pagina: "index" });
 });
-router.get("/adm-cliente", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
-    usuariosController.listarUsuarios(req, res);
+router.get("/adm-cliente", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
+    clienteController.listarCliente(req, res);
 });
-router.get("/adm-cliente-novo", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
+router.get("/adm-cliente-novo", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
     res.render("pages/adm/template-adm", { pagina: "cliente/create", cliente: null });
 });
 
-router.get("/adm-cliente-edit", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
+router.get("/adm-cliente-edit", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
     const pagina = "/adm-cliente-edit"
-    usuariosController.dadosUsuario(req, res, pagina);
+    clienteController.dadosCliente(req, res, pagina);
 });
 
-router.get("/adm-cliente-list", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
+router.get("/adm-cliente-list", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
     const pagina = "/adm-cliente-list"
-    usuariosController.dadosUsuario(req, res, pagina);
+    clienteController.dadosCliente(req, res, pagina);
 });
 
-router.get("/adm-cliente-del", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false }, [2, 3]), function (req, res) {
+router.get("/adm-cliente-del", verifyAutenticado, verifyAutorizado("pages/template-home", { pagina: "login", logado: null, alert: false, erros:null }, [2, 3]), function (req, res) {
     const pagina = "/adm-cliente-del"
-    usuariosController.dadosUsuario(req, res, pagina);
+    clienteController.dadosCliente(req, res, pagina);
 });
 
 router.post("/adicionarCliente", function (req, res) {
-    usuariosController.adicionarUsuario(req, res);
+    clienteController.adicionarCliente(req, res);
 });
 router.post("/inativarUsuario", function (req, res) {
-    usuariosController.deletarUsuario(req, res)
+    clienteController.deletarCliente(req, res)
 });
 
 router.post("/editarUsuario", function (req, res) {
-    usuariosController.editarUsuario(req, res)
+    clienteController.editarCliente(req, res)
 });
 
 router.get("/logOut", clearSession, function (req, res) {
