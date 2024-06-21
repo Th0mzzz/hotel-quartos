@@ -53,7 +53,7 @@ const usuariosController = {
             .bail()
     ],
     validarLogin: [
-        body("")
+        body("emailOrUser")
             .isLength({ min: 3, max: 45 }).withMessage("Usuário necessário ter pelo menos 3 e até 45 digitos!")
         ,
         body('senha')
@@ -90,7 +90,14 @@ const usuariosController = {
         let errors = validationResult(req)
         if (!errors.isEmpty()) {
             console.log(errors)
-            res.render("pages/template-login", jsonResult);
+            const jsonResult = {
+                pagina: "cadastro",
+                valores: req.body,
+                erros: errors,
+                alert: null,
+                logado: null
+            }
+            res.render("pages/template-home", jsonResult);
         } else {
             try {
                 const { nome, fone, nomeUsuario, email, senha } = req.body;

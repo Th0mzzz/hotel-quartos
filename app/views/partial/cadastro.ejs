@@ -1,6 +1,56 @@
 ﻿<!-- include header -->
 <%- include("../partial/header-home") %>
+<% let avisoErro = {
+    "nome":"",
+    "nomeUsuario":"",
+    "email":"",
+    "fone":"",
+    "senha":"",
+}
+let = msgErro =""
 
+    if(erros){
+        erros.errors.forEach(function (erro) {
+            if(erro.path == "nome"){
+                avisoErro.nome = "erro"
+                msgErro += `${erro.msg} <br>`
+            }
+            if(erro.path == "nomeUsuario"){
+                avisoErro.nomeUsuario = "erro"
+                msgErro += `${erro.msg} <br>`
+            }
+            if(erro.path == "email"){
+                avisoErro.email = "erro"
+                msgErro += `${erro.msg} <br>`
+            }
+            if(erro.path == "fone"){
+                avisoErro.fone = "erro"
+                msgErro += `${erro.msg} <br>`
+            }
+            if(erro.path == "senha"){
+                avisoErro.senha = "erro"
+                msgErro += `${erro.msg} <br>`
+            }
+        })
+    }
+%>
+<style>
+    .alert {
+        background: #ff7070;
+        color: #880909;
+        padding: 1rem 1.2rem;
+        border-radius: 10px;
+        border: 1px solid #880909;
+        margin-bottom: 1rem;
+    }
+
+    .erro{
+        border: 1px solid red !important;
+        &::placeholder{
+            color: #880909;
+        }
+    }
+</style>
 <main>
     <div class="login-page">
 
@@ -8,11 +58,11 @@
             <a href="/"><span id="fechar">&times;</span></a>
             <form action="/cadastrar" method="post"  class ="login-form">
                 <h2>Cadastro</h2>
-                <input type="text" name="nome" id="nome" placeholder = "Seu nome">
-                <input type="text" name="nomeUsuario" id="nomeUsuario" placeholder = "Seu Usuário">
-                <input type="email" name="email" id="email" placeholder = "Seu e-mail">
-                <input type="text" name="fone" id="fone" placeholder = "Seu Telefone">
-                <input type="password" name="senha" id="senha" placeholder = "Sua senha">
+                <input class="<%= avisoErro.nome %>" required type="text" name="nome" id="nome" placeholder = "Seu nome" >
+                <input class="<%= avisoErro.nomeUsuario %>" required type="text" name="nomeUsuario" id="nomeUsuario" placeholder = "Seu Usuário">
+                <input class="<%= avisoErro.email %>" required type="email" name="email" id="email" placeholder = "Seu e-mail">
+                <input class="<%= avisoErro.fone %>" required type="text" name="fone" id="fone" placeholder = "Seu Telefone">
+                <input class="<%= avisoErro.senha %>" required type="password" name="senha" id="senha" placeholder = "Sua senha">
                 
                 <button type="submit">Cadastrar</button>
                 <p class="message">Já é cadastrado? <a href="login">Entre</a></p>
@@ -20,3 +70,10 @@
         </div>
     </div>
 </main>
+
+<% if(msgErro != ""){%>
+    <script>
+        let msgErro = "<%= msgErro %>"
+        newNotify("Erro(s) nos campos", "verifique o(s) campo(s) <br>" + msgErro.replace(/&lt;/g,"<").replace(/&gt;/g,">"), "error", "center", 5000)
+    </script>
+<%} %>
