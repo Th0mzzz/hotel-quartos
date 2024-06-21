@@ -3,3 +3,5 @@ para adicionar as depencencias use:
 npm config set strict-ssl false ( se necessário)
 
 npm install
+
+configure o .env DB_PASSWORD = @ITB123456 caso estiver na escola
